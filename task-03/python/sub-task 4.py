@@ -16,7 +16,6 @@ for i in range(nnum):
     for j in range(i + 1):
         output.write("* ")
     output.write("\n")
-
 for i in range(nnum - 1):
     for j in range(i + 1):
         output.write(" ")
