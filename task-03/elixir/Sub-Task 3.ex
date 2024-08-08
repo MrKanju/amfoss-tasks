@@ -10,7 +10,6 @@ for i <- 0..(rows - 2) do
   IO.puts("")
 end
 
-# Print the lower part of the diamond
 for i <- 0..(rows - 1) do
   # Print leading spaces
   for _ <- 0..i do
