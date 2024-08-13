@@ -1,0 +1,20 @@
+import System.IO
+
+main :: IO ()
+main = do
+    inputFile <- readFile "input.txt"            
+    let rows = read inputFile :: Int             
+    let upperHalf = concatMap (\i -> 
+            replicate (rows-i-1) ' ' ++ concat (replicate (i+1) "* ") ++ "\n") [0..rows-1]
+    
+
+    let lowerHalf = concatMap (\i -> 
+            replicate (i+1) ' ' ++ concat (replicate (rows-i-1) "* ") ++ "\n") [0..rows-2]
+
+    let pattern = upperHalf ++ lowerHalf  
+    
+    writeFile "output.txt" pattern        
+    
+    outputFile <- readFile "output.txt"
+    putStrLn "Content of output.txt:"
+    putStrLn outputFile
