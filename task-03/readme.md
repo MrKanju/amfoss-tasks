@@ -1,0 +1,2 @@
+# task 04
+This was one of the tasks which consumed so much of my time initially itied to learn most of the languages which i thought would be fruitful, but it as the task progressed i realised that was not the intention of the whole task, all the 4 sub tasks had a basic logic and concept i just learned used this same logic and method in all the languages and it was way more easy and intresting .it turned out that most of the language had quite similar syntax.overall i found this task helpful and intresting.
