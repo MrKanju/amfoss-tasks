@@ -5,7 +5,6 @@ const productCatalog = document.querySelector('.product-catalog');
 let products = [];
 let cart = [];
 
-// Fetch products from API
 async function fetchProducts() {
     try {
         const response = await fetch('https://fakestoreapi.com/products');
@@ -16,9 +15,8 @@ async function fetchProducts() {
     }
 }
 
-// Display products on the screen
 function displayProductsOnScreen() {
-    productCatalog.innerHTML = ''; // Clear existing content
+    productCatalog.innerHTML = ''; 
     if (products.length === 0) {
         terminalOutput.textContent += 'No products available.\n';
         return;
@@ -34,7 +32,7 @@ function displayProductsOnScreen() {
     });
 }
 
-// Handle terminal input
+
 function handleInput(command) {
     const [action, ...args] = command.trim().split(' ');
 
@@ -74,7 +72,6 @@ function handleInput(command) {
     terminalInput.value = '';
 }
 
-// List all products
 function listProducts() {
     terminalOutput.innerHTML = 'Available Products:\n';
     products.forEach(product => {
@@ -82,7 +79,6 @@ function listProducts() {
     });
 }
 
-// Show details of a specific product
 function showProductDetails(productId) {
     const product = products.find(p => p.id === parseInt(productId));
     if (product) {
@@ -97,7 +93,6 @@ function showProductDetails(productId) {
     }
 }
 
-// Add product to cart
 function addToCart(productId) {
     const product = products.find(p => p.id === parseInt(productId));
     if (product) {
@@ -108,7 +103,6 @@ function addToCart(productId) {
     }
 }
 
-// Remove product from cart
 function removeFromCart(productId) {
     const index = cart.findIndex(p => p.id === parseInt(productId));
     if (index !== -1) {
@@ -119,7 +113,6 @@ function removeFromCart(productId) {
     }
 }
 
-// View current items in cart
 function viewCart() {
     if (cart.length === 0) {
         terminalOutput.textContent += 'Cart is empty.\n';
@@ -131,7 +124,6 @@ function viewCart() {
     });
 }
 
-// Proceed to checkout
 function buyItems() {
     if (cart.length === 0) {
         terminalOutput.textContent += 'Cart is empty. Add items to the cart before buying.\n';
@@ -141,12 +133,10 @@ function buyItems() {
     window.location.href = 'checkout.html';
 }
 
-// Clear terminal output
 function clearTerminal() {
     terminalOutput.textContent = '';
 }
 
-// Search products by name
 function searchProducts(query) {
     const results = products.filter(p => p.title.toLowerCase().includes(query.toLowerCase()));
     if (results.length === 0) {
@@ -159,7 +149,6 @@ function searchProducts(query) {
     });
 }
 
-// Sort products by price or name
 function sortProducts(criteria) {
     if (criteria === 'price') {
         products.sort((a, b) => a.price - b.price);
@@ -172,12 +161,10 @@ function sortProducts(criteria) {
     displayProductsOnScreen();
 }
 
-// Event listener for terminal input
 terminalInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         handleInput(terminalInput.value);
     }
 });
 
-// Initial fetch of products
 fetchProducts();
