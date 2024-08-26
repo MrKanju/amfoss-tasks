@@ -5,16 +5,16 @@
 
 .product-catalog {
     width: 60%;
-    overflow-y: auto; /* Allow scrolling if needed */
+    overflow-y: auto; 
     display: flex;
-    flex-wrap: wrap; /* Wrap products into rows */
-    gap: 10px; /* Space between items */
+    flex-wrap: wrap; 
+    gap: 10px; 
     padding: 20px;
     box-sizing: border-box;
 }
 
 .product {
-    width: calc(25% - 10px); /* 4 items per row with space between */
+    width: calc(25% - 10px); 
     box-sizing: border-box;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -38,7 +38,7 @@
     color: #fff;
     padding: 20px;
     box-sizing: border-box;
-    overflow-y: auto; /* Allow scrolling if needed */
+    overflow-y: auto; 
 }
 
 .terminal-window {
