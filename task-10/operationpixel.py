@@ -12,7 +12,6 @@ def detectdot(image_path):
     if len(contours) == 0:
         return None, None 
 
-   
     contour = max(contours, key=cv2.contourArea)
     M = cv2.moments(contour)
     
@@ -22,11 +21,17 @@ def detectdot(image_path):
     cY = int(M["m01"] / M["m00"])
     
     color = image[cY, cX]
+
     
-    return (cX, cY), color
+    color_rgb = (color[2], color[1], color[0])
+
+    
+    if color_rgb == (0, 0, 255):  
+        color_rgb = (255, 255, 0) 
+    
+    return (cX, cY), color_rgb
 
 def sortimages(images):
-   
     import re
 
     def extractnumber(filename):
@@ -39,7 +44,8 @@ def stitchimages(image_folder):
     images = [img for img in os.listdir(image_folder) if img.endswith('.png')]
     images = sortimages(images)
 
-    stitchedimage = Image.new('RGB', (512, 512), (255, 255, 255))
+
+    stitchedimage = Image.new('RGB', (512, 512), (255, 255, 255))  
     draw = ImageDraw.Draw(stitchedimage)
     
     last_position = None
@@ -55,7 +61,8 @@ def stitchimages(image_folder):
             continue
         
         if last_position is not None:
-            draw.line([last_position, position], fill=tuple(int(c) for c in last_color), width=5)
+
+            draw.line([last_position, position], fill=color, width=5)
         
         last_position = position
         last_color = color
@@ -63,7 +70,6 @@ def stitchimages(image_folder):
     output_path = os.path.join(image_folder, 'image.png')
     stitchedimage.save(output_path)
     print(f"Stitched image saved as {output_path}")
-
 
 image_folder = '/home/kanju/Operation-Pixel-Merge/assets'  
 stitchimages(image_folder)
