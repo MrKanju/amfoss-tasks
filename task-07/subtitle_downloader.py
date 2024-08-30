@@ -53,7 +53,7 @@ def main(url, language, output, file_size, match_by_hash, batch_download):
             return
 
         
-        idmovie = "4959"  # Replace with idmovie value from movie URL of your choice
+        idmovie = "4959"  #hardcoded the digit 4959 is the osdb obtained from the opensubtitles manually
 
         subtitles = search_subtitles_by_idmovie(idmovie, language)
 
