@@ -5,29 +5,24 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackQueryHandler, ContextTypes, ConversationHandler
 from docx import Document
 
-# Bot configuration constants
 API_TOKEN = "7084452444:AAFz_ut69wnsndnldzHc4AtOOzDIEl66M4U"
-BOOKS_API_KEY = "7084452444:AAFz_ut69wnsndnldzHc4AtOOzDIEl66M4U"
+BOOKS_API_KEY = "AIzaSyAu7QF8blrovpt9R7T-41VjZI-LTICo2Xs"
 BOOKS_DOC = "books_collection.docx"
 
-# Conversation states
 ADDING_BOOK = 1
 DELETING_BOOK = 2
 
 def initialize_document():
-    """Create a new Word document or clear an existing one."""
     document = Document()
     document.add_heading('Books Collection', level=1)
     document.save(BOOKS_DOC)
 
 def append_to_document(title, url):
-    """Add a book entry to the Word document."""
     document = Document(BOOKS_DOC)
     document.add_paragraph(f"{title} - {url}")
     document.save(BOOKS_DOC)
 
 def delete_from_document(title):
-    """Remove a book entry from the Word document."""
     document = Document(BOOKS_DOC)
     paragraphs = [p.text for p in document.paragraphs if title not in p.text]
     document._body.clear_content()
@@ -37,7 +32,6 @@ def delete_from_document(title):
     document.save(BOOKS_DOC)
 
 async def handle_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Handle callback queries for book management."""
     query = update.callback_query
     await query.answer()
 
@@ -53,7 +47,6 @@ async def handle_query(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_document(document=file)
 
 async def process_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Process user input based on the current action."""
     action = context.user_data.get('action')
 
     if action == 'add':
@@ -71,16 +64,13 @@ async def process_input(update: Update, context: ContextTypes.DEFAULT_TYPE):
     context.user_data['action'] = None
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Send a welcome message when the bot starts."""
     await update.message.reply_text("Welcome to the Book Manager Bot! Use /help for commands.")
 
 async def request_genre(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Prompt the user to input a genre."""
     await update.message.reply_text('Enter the genre you want to explore.')
     return ADDING_BOOK
 
 async def search_books(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Search for books and send results in a CSV file."""
     genre = update.message.text
     books = find_books(genre)
     if not books:
@@ -92,10 +82,10 @@ async def search_books(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 def find_books(genre):
-    """Query the Google Books API for books based on the genre."""
     url = f"https://www.googleapis.com/books/v1/volumes?q=subject:{genre}&key={BOOKS_API_KEY}"
     response = requests.get(url)
     if response.status_code != 200:
+        print(f"Error: Received status code {response.status_code}")
         return []
     
     data = response.json()
@@ -113,7 +103,6 @@ def find_books(genre):
     return books_list
 
 def create_csv(books_list):
-    """Generate a CSV file from the list of books."""
     output = StringIO()
     writer = csv.DictWriter(output, fieldnames=["title", "authors", "description", "published_date", "language", "preview_link"])
     writer.writeheader()
@@ -122,12 +111,10 @@ def create_csv(books_list):
     return BytesIO(output.getvalue().encode())
 
 async def ask_for_book(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Ask the user for the title of the book they want to preview."""
     await update.message.reply_text('Type the book title to get a preview link.')
     return DELETING_BOOK
 
 async def provide_preview(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Send a preview link for the specified book title."""
     title = update.message.text
     preview_link = get_preview_link(title)
     
@@ -140,10 +127,10 @@ async def provide_preview(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 def get_preview_link(title):
-    """Fetch the preview link for a book from the Google Books API."""
     url = f"https://www.googleapis.com/books/v1/volumes?q=intitle:{title}&key={BOOKS_API_KEY}"
     response = requests.get(url)
     if response.status_code != 200:
+        print(f"Error: Received status code {response.status_code}")
         return None
     
     data = response.json()
@@ -154,7 +141,6 @@ def get_preview_link(title):
     return None
 
 async def display_options(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Show options for managing the book collection."""
     options = [
         [InlineKeyboardButton("Add Book", callback_data='add')],
         [InlineKeyboardButton("Remove Book", callback_data='remove')],
@@ -164,7 +150,6 @@ async def display_options(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('Select an action to manage your book collection:', reply_markup=markup)
 
 async def help_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Provide a help message with available commands."""
     help_message = (
         "/start - Start the bot\n"
         "/book - Search for books by genre\n"
@@ -175,7 +160,6 @@ async def help_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(help_message)
 
 def main():
-    """Set up and run the Telegram bot."""
     initialize_document()
 
     bot = Application.builder().token(API_TOKEN).build()
