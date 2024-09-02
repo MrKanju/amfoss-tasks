@@ -35,7 +35,7 @@ def get_movie_file_info_from_url(url):
 def search_subtitles_by_imdb_id(imdb_id, language=None):
 
     query = f"{BASE_URL}/en/search2/sublanguageid-{language}/imdbid-{imdb_id}" if language else f"{BASE_URL}/en/search2/imdbid-{imdb_id}"
-    print(f"Search query: {query}")  # Debug statement
+    print(f"Search query: {query}") 
     response = requests.get(query)
     soup = BeautifulSoup(response.text, "html.parser")
     subtitles = soup.find_all("a", class_="bnone")
