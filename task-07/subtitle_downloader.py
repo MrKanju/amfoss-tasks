@@ -30,6 +30,10 @@ def calculate_file_hash_and_size(url):
 def find_subtitles(imdb_id, language=None):
     """Find subtitles based on IMDb ID and language."""
     query = f"{BASE_URL}/en/search2/sublanguageid-{language}/imdbid-{imdb_id}" if language else f"{BASE_URL}/en/search2/imdbid-{imdb_id}"
+<<<<<<< HEAD
+=======
+    print(f"Search query: {query}") 
+>>>>>>> a23064482bcd110d7f42d1be69f4cab3dabad4b0
     response = requests.get(query)
     soup = BeautifulSoup(response.text, "html.parser")
     return soup.find_all("a", class_="bnone")
