@@ -8,7 +8,7 @@ Let me share you some of my goal, im tryinf to set a attractive resume for which
 ### HOW WILL YOU CONTRIBUTE BACK TO THE CLUB?
 I would try my level best on finishing my duties and to recive and share knowledge from my peers, i would try my best to contribute to the grwoth of the club and myself by learning from mistakes and by the willingness to grow.
 ### WHAT ARE YOUR THOUGHTS AND FEEDBACK ON THE PRAVESHAN SELECTION PROCESS?
-The selection process consisted a mixture of tasks of diffrent difficulty, i gound very few tasks hard. but the catch here is the patience and time management eventhough i tried to achive both of these i im kinda in (In-Progress)for 2 tasks, but i feel happy enough that i tried and was able to aquire some knowledge than simply wasting my valuble vacation.
+The selection process consisted a mixture of tasks of diffrent difficulty, i found a couple of tasks hard. but i realised the catch here is the patience and time management eventhough i tried to achive both ,im kinda in (In-Progress)for 2 tasks, but i feel happy enough that i tried and was able to aquire some knowledge than simply wasting my valuble vacation.
 # Task Status
 
 | Task List | Description | Status |
