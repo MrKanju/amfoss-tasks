@@ -1,1 +1,2 @@
-
+# Subtitles task
+This was one of the hardest tasks for me ,like i created all api tokens required and set up a code too for taking the url finding the movie name from it, using the movie name fetchig the imdb id, using it listing susbtitles and downloading the required one was my modus operandi, everything was good till finding the imdb id after which i was unablr to search for subtitles using it and i was unable to identify the mistake too.In the end i decided to hardcode the test opensubtitles id into the code which i later changes when i realised my mistake.
