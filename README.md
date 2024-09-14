@@ -13,7 +13,7 @@
 | Task List | Description | Status |
 | :-:       | :-:         | :-:    |
 | Task-00 | Install Linux | Completed |
-| Task-01|           |      |
+| Task-01| Typing          | In-Progress |
 | Task -02| Terminal Chaos | Completed |
 | Task-03| Hello, World! | Completed |
 | Task-04| Gopal and his PagePal | Completed|
